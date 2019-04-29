@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/on_boarding/on_boarding_page.dart';
 import 'package:flutter_app/login/login_page.dart';
-
+import 'package:flutter_app/expired_remind/home_page.dart';
 void main() => runApp(MaterialApp(
-      home: MyLoginApp(),
+      home: MyExpiredRemindApp(),
       debugShowCheckedModeBanner: false,
     ));

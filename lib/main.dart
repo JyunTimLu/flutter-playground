@@ -103,11 +103,8 @@ class _MyHomeAppState extends State<HomeApp> {
             ),
             FlatButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            MyGoToMarketApp(title: "go to market")));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyGoToMarketApp()));
               },
               child: Text(
                 "Go to market",

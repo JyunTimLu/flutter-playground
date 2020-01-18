@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/weather/models/models.dart' as model;
+import 'package:flutter_app/weather/widgets/temperature.dart';
 import 'package:flutter_app/weather/widgets/weather_conditions.dart';
 
 class CombinedWeatherTemperature extends StatelessWidget {
@@ -12,7 +13,11 @@ class CombinedWeatherTemperature extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(
+          height: 20.0,
+        ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsets.all(20.0),
@@ -20,7 +25,18 @@ class CombinedWeatherTemperature extends StatelessWidget {
             )
           ],
         ),
-        //todo 20200107 work in progress Temperature
+        SizedBox(
+          height: 20.0,
+        ),
+        Temperature(
+          temperature: weather.temp,
+          high: weather.maxTemp,
+          low: weather.minTemp,
+          unit: "杜C",
+        ),
+        SizedBox(
+          height: 20.0,
+        ),
         Center(
           child: Text(
             weather.formattedCondition,
@@ -30,7 +46,7 @@ class CombinedWeatherTemperature extends StatelessWidget {
               color: Colors.black
             ),
           ),
-        )
+        ),
       ],
     );
   }

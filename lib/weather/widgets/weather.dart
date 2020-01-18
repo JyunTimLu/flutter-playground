@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/weather/blocs/blocs.dart';
 import 'package:flutter_app/weather/widgets/combine_weather_temperature.dart';
-import 'package:flutter_app/weather/widgets/loat_updated.dart';
+import 'package:flutter_app/weather/widgets/last_updated.dart';
 import 'package:flutter_app/weather/widgets/location.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -55,15 +55,24 @@ class MyWeatherAppState extends State<WeatherApp> {
 
               return ListView(
                 children: <Widget>[
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   Center(
                     child: Location(
                       location: weather.location,
                     ),
                   ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   Center(
                     child: LastUpdated(
                       dateTime: weather.lastUpdated,
                     ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
                   ),
                   CombinedWeatherTemperature(
                     weather: weather,

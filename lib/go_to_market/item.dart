@@ -8,7 +8,7 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text("內容"),
+      title: Text(map["作物名稱"]),
     );
   }
 }

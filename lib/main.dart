@@ -46,7 +46,7 @@ class _MyHomeAppState extends State<HomeApp> {
                     MaterialPageRoute(
                         builder: (context) => StreamProvider.value(
                             initialData: false,
-                            stream: controller.stream,
+                            value: controller.stream,
                             child: MyExpiredRemindApp())));
                 print("click expire");
               },

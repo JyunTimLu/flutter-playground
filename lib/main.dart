@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/expired_remind/home_page.dart';
+import 'package:flutter_app/go_to_market/go_to_market.dart';
 import 'package:flutter_app/grid_view/grid_view_page.dart';
 import 'package:flutter_app/login/login_page.dart';
 import 'package:flutter_app/on_boarding/on_boarding_page.dart';
@@ -93,6 +94,20 @@ class _MyHomeAppState extends State<HomeApp> {
               },
               child: Text(
                 "Grid View",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.blue,
+            ),
+            FlatButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MyGoToMarketApp(title: "go to market")));
+                print("click expire");
+              },
+              child: Text(
+                "Go to market",
                 style: TextStyle(color: Colors.white),
               ),
               color: Colors.blue,

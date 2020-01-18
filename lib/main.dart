@@ -10,7 +10,8 @@ import 'package:flutter_app/login/login_page.dart';
 import 'package:flutter_app/on_boarding/on_boarding_page.dart';
 import 'package:flutter_app/weather/api/repository.dart';
 import 'package:flutter_app/weather/api/weather_api_client.dart';
-import 'package:flutter_app/weather/bloc/bloc_delegate.dart';
+import 'package:flutter_app/weather/blocs/blocs.dart';
+import 'package:flutter_app/weather/widgets/weather_main.dart';
 import 'package:flutter_app/weather/widgets/weather.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -19,8 +20,6 @@ import 'package:http/http.dart' as http;
 final controller = StreamController<bool>.broadcast();
 
 void main() {
-  Repository(WeatherApiClient(httpClient: http.Client()));
-
   BlocSupervisor.delegate = SimpleBlocDelegate();
 
   runApp(MaterialApp(
@@ -35,6 +34,8 @@ void main() {
 }
 
 class HomeApp extends StatefulWidget {
+  final repo = Repository(WeatherApiClient(httpClient: http.Client()));
+
   @override
   State<StatefulWidget> createState() {
     return _MyHomeAppState();
@@ -60,7 +61,6 @@ class _MyHomeAppState extends State<HomeApp> {
                             initialData: false,
                             value: controller.stream,
                             child: MyExpiredRemindApp())));
-                print("click expire");
               },
               child: Text(
                 "ExpireRemindPage",
@@ -72,7 +72,6 @@ class _MyHomeAppState extends State<HomeApp> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => MyLoginApp()));
-                print("click expire");
               },
               child: Text(
                 "Login Page",
@@ -84,7 +83,6 @@ class _MyHomeAppState extends State<HomeApp> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => BoardingApp()));
-                print("click expire");
               },
               child: Text(
                 "On boarding page",
@@ -96,7 +94,6 @@ class _MyHomeAppState extends State<HomeApp> {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => GridViewApp()));
-                print("click expire");
               },
               child: Text(
                 "Grid View",
@@ -111,7 +108,6 @@ class _MyHomeAppState extends State<HomeApp> {
                     MaterialPageRoute(
                         builder: (context) =>
                             MyGoToMarketApp(title: "go to market")));
-                print("click expire");
               },
               child: Text(
                 "Go to market",
@@ -124,8 +120,7 @@ class _MyHomeAppState extends State<HomeApp> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            WeatherApp(title: "go to market")));
+                        builder: (context) => MyWeatherApp(repo: widget.repo)));
                 print("click expire");
               },
               child: Text(

@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/weather/api/repository.dart';
-import 'package:flutter_app/weather/bloc/weather/weather_state.dart';
-import 'package:flutter_app/weather/model/weather.dart';
+import 'package:flutter_app/weather/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'blocs.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
@@ -18,9 +20,10 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     if (event is FetchWeatherEvent) {
       yield WeatherLoading();
       try {
+        print(event.city);
         final Weather weather = await repo.getWeather(event.city);
         yield WeatherLoaded(weather: weather);
-      } catch (_) {
+      } on Exception catch (_) {
         yield WeatherError();
       }
     }
@@ -45,7 +48,7 @@ class FetchWeatherEvent extends WeatherEvent {
 
   final String city;
 
-  FetchWeatherEvent(this.city);
+  FetchWeatherEvent({@required this.city}): assert(city != null);
 
   @override
   List<Object> get props => [city];

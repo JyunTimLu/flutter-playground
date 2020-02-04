@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/0to1/main.dart';
 import 'package:flutter_app/expired_remind/home_page.dart';
 import 'package:flutter_app/go_to_market/go_to_market.dart';
 import 'package:flutter_app/grid_view/grid_view_page.dart';
@@ -12,29 +13,48 @@ import 'package:flutter_app/weather/api/repository.dart';
 import 'package:flutter_app/weather/api/weather_api_client.dart';
 import 'package:flutter_app/weather/blocs/blocs.dart';
 import 'package:flutter_app/weather/widgets/weather_main.dart';
-import 'package:flutter_app/weather/widgets/weather.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 final controller = StreamController<bool>.broadcast();
 
 void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
 
-  runApp(MaterialApp(
-    theme: ThemeData(
-      accentColor: Colors.amberAccent,
-      primaryColor: Colors.amberAccent,
-      primaryColorDark: Colors.amber,
-    ),
-    home: HomeApp(),
-    debugShowCheckedModeBanner: false,
-  ));
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        accentColor: Colors.amberAccent,
+        primaryColor: Colors.amberAccent,
+        primaryColorDark: Colors.amber,
+      ),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        "reminder": (context) {
+          return StreamProvider.value(
+              initialData: false,
+              value: controller.stream,
+              child: MyExpiredRemindApp());
+        },
+        "login": (context) => MyLoginApp(),
+        "boarding": (context) => BoardingApp(),
+        "gridView": (context) => GridViewApp(),
+        "goToMarket": (context) => MyGoToMarketApp(),
+        "zeroToOne": (context) => ZeroToOne(),
+      },
+      home: HomeApp(),
+    );
+  }
 }
 
 class HomeApp extends StatefulWidget {
-  final repo = Repository(WeatherApiClient(httpClient: http.Client()));
+  final weatherRepo = Repository(WeatherApiClient(httpClient: http.Client()));
 
   @override
   State<StatefulWidget> createState() {
@@ -54,13 +74,7 @@ class _MyHomeAppState extends State<HomeApp> {
           children: <Widget>[
             FlatButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => StreamProvider.value(
-                            initialData: false,
-                            value: controller.stream,
-                            child: MyExpiredRemindApp())));
+                Navigator.pushNamed(context, "reminder");
               },
               child: Text(
                 "ExpireRemindPage",
@@ -70,8 +84,7 @@ class _MyHomeAppState extends State<HomeApp> {
             ),
             FlatButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MyLoginApp()));
+                Navigator.pushNamed(context, "login");
               },
               child: Text(
                 "Login Page",
@@ -81,8 +94,7 @@ class _MyHomeAppState extends State<HomeApp> {
             ),
             FlatButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => BoardingApp()));
+                Navigator.pushNamed(context, "boarding");
               },
               child: Text(
                 "On boarding page",
@@ -92,8 +104,7 @@ class _MyHomeAppState extends State<HomeApp> {
             ),
             FlatButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => GridViewApp()));
+                Navigator.pushNamed(context, "gridView");
               },
               child: Text(
                 "Grid View",
@@ -103,8 +114,7 @@ class _MyHomeAppState extends State<HomeApp> {
             ),
             FlatButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MyGoToMarketApp()));
+                Navigator.pushNamed(context, "goToMarket");
               },
               child: Text(
                 "Go to market",
@@ -117,15 +127,25 @@ class _MyHomeAppState extends State<HomeApp> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => MyWeatherApp(repo: widget.repo)));
-                print("click expire");
+                        builder: (context) =>
+                            MyWeatherApp(repo: widget.weatherRepo)));
               },
               child: Text(
                 "Go to weather",
                 style: TextStyle(color: Colors.white),
               ),
               color: Colors.blue,
-            )
+            ),
+            FlatButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "zeroToOne");
+              },
+              child: Text(
+                "Zero to One",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.blue,
+            ),
           ],
         ),
       ),

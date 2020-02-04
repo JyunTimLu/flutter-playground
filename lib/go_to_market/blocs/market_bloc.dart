@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/go_to_market/api/repository.dart';
 import 'package:flutter_app/go_to_market/blocs/market_event.dart';
 import 'package:flutter_app/go_to_market/blocs/market_state.dart';

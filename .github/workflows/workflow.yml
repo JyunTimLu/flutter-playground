@@ -35,5 +35,5 @@ jobs:
           git remote add secure-origin https://${{ secrets.ACCESS_TOKEN }}@github.com/JyunTimLu/flutter-playground.git
           git checkout -b gh-pages
           git add .
-          git commit -m "Updated docs"
+          git commit -m "Deply by CI"
           git push --force secure-origin gh-pages

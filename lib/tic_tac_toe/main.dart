@@ -36,7 +36,7 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
   Animation<double> _boardAnimation;
   AnimationController _boardController;
 
-  double _boardOpacity = 1.0;
+  double _boardOpacity = 10.0;
   bool _showWinnerDisplay = false;
   int _moveCount = 0;
   int _xWins = 0;
@@ -79,14 +79,16 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
                   padding: EdgeInsets.only(
                     left: 100,
                     right: 100,
-                    top: 40,
+                    top: 50,
                     bottom: 40,
                   ),
-                  child: Stack(
-                    children: <Widget>[
-                      board,
-                      winnerDisplay,
-                    ],
+                  child: Container(
+                    child: Stack(
+                      children: <Widget>[
+                        board,
+                        winnerDisplay,
+                      ],
+                    ),
                   ),
                 ),
                 bottomBar,
@@ -101,7 +103,7 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
   Widget get scoreBoard => Padding(
         padding: const EdgeInsets.only(top: 16.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[xScore, drawScore, oScore],
         ),
       );
@@ -112,6 +114,7 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
         left: 0,
         right: 0,
         child: Visibility(
+          visible: _showWinnerDisplay,
           child: Opacity(
             opacity: 1.0,
             child: Row(
@@ -130,7 +133,7 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
                     child: Circle(),
                   ),
                 Text(
-                  (winner == GameState.Blank) ? "It's a draw!" : 'win!',
+                  (winner == GameState.Blank) ? "It's a draWw!" : 'win!',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: accentColor,
@@ -151,7 +154,7 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
           child: Cross(),
         ),
         Text(
-          'wins',
+          '$_xWins wins',
           style: TextStyle(
               fontWeight: FontWeight.bold, color: crossColor, fontSize: 20.0),
         )
@@ -169,7 +172,9 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
           Text(
             '$_oWins wins',
             style: TextStyle(
-                fontWeight: FontWeight.bold, color: crossColor, fontSize: 20.0),
+                fontWeight: FontWeight.bold,
+                color: circleColor,
+                fontSize: 20.0),
           ),
         ],
       );
@@ -194,17 +199,18 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
   Widget get board => Opacity(
         opacity: _boardOpacity,
         child: Padding(
-          padding: const EdgeInsets.only(left: 32.0, right: 32.0),
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
           child: AspectRatio(
             aspectRatio: 1.0,
             child: Container(
+              color: Colors.amber,
               child: GridView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     childAspectRatio: 1.0,
-                    crossAxisSpacing: 4.0,
-                    mainAxisSpacing: 4.0),
+                    crossAxisSpacing: 10.0,
+                    mainAxisSpacing: 10.0),
                 itemCount: 9,
                 itemBuilder: (context, index) {
                   int row = index ~/ 3;
@@ -235,7 +241,16 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
 
   Widget gameButton(int row, int col) {
     return GestureDetector(
-      onTap: null,
+      onTap:
+          (boardState[row][col] == GameState.Blank) && winner == GameState.Blank
+              ? () {
+                  _moveCount++;
+                  boardState[row][col] = activePlayer;
+                  checkWinningCondition(row, col, activePlayer);
+                  toggleActivePlayer();
+                  setState(() {});
+                }
+              : null,
       child: Container(
         color: Colors.white,
         child: Center(

@@ -25,17 +25,19 @@ class _CrossState extends State<Cross> with SingleTickerProviderStateMixin {
           _fraction = _animation.value;
         });
       });
+    _controller.forward();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: AspectRatio(
-          aspectRatio: 1.0,
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: CustomPaint(painter: CrossPainter(_fraction)),
-          )),
+        aspectRatio: 1.0,
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: CustomPaint(painter: CrossPainter(_fraction)),
+        ),
+      ),
     );
   }
 }
@@ -47,7 +49,7 @@ class CrossPainter extends CustomPainter {
   CrossPainter(this.fraction) {
     _crossPaint = Paint()
       ..color = crossColor
-      ..strokeWidth = 14.0
+      ..strokeWidth = 12.0
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
   }
@@ -57,17 +59,16 @@ class CrossPainter extends CustomPainter {
     double leftLineFraction, rightLineFraction;
     if (fraction < .5) {
       leftLineFraction = fraction / .5;
-      rightLineFraction = 0;
+      rightLineFraction = 0.0;
     } else {
       leftLineFraction = 1.0;
       rightLineFraction = (fraction - .5) / .5;
     }
 
     canvas.drawLine(
-      Offset(0.0, 0.0),
-      Offset(size.width * leftLineFraction, size.height * leftLineFraction),
-      _crossPaint,
-    );
+        Offset(0.0, 0.0),
+        Offset(size.width * leftLineFraction, size.height * leftLineFraction),
+        _crossPaint);
 
     if (fraction >= .5) {
       canvas.drawLine(

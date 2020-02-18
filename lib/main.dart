@@ -9,6 +9,7 @@ import 'package:flutter_app/go_to_market/go_to_market.dart';
 import 'package:flutter_app/grid_view/grid_view_page.dart';
 import 'package:flutter_app/login/login_page.dart';
 import 'package:flutter_app/on_boarding/on_boarding_page.dart';
+import 'package:flutter_app/tic_tac_toe/main.dart';
 import 'package:flutter_app/weather/api/repository.dart';
 import 'package:flutter_app/weather/api/weather_api_client.dart';
 import 'package:flutter_app/weather/blocs/blocs.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         "gridView": (context) => GridViewApp(),
         "goToMarket": (context) => MyGoToMarketApp(),
         "zeroToOne": (context) => ZeroToOne(),
+        'ticTacToe': (context) => MyTicTacToeApp()
       },
       home: HomeApp(),
     );
@@ -142,6 +144,16 @@ class _MyHomeAppState extends State<HomeApp> {
               },
               child: Text(
                 "Zero to One",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.blue,
+            ),
+            FlatButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "ticTacToe");
+              },
+              child: Text(
+                "ticTacToe",
                 style: TextStyle(color: Colors.white),
               ),
               color: Colors.blue,

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/0to1/basic_widget/basic_widget.dart';
+import 'package:flutter_app/0to1/widgets/basic_widget.dart';
 
 class ZeroToOne extends StatelessWidget {
   @override

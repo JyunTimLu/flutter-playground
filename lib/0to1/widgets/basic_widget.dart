@@ -25,3 +25,5 @@ class MyImage extends StatelessWidget {
         "https://thethreatreport.com/wp-content/uploads/2019/05/What-Can-Make-You-Decide-iOS-vs-Android.jpg");
   }
 }
+
+enum GameState { Blank, X, O}

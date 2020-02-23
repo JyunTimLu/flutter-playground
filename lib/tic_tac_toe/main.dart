@@ -36,7 +36,7 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
   Animation<double> _boardAnimation;
   AnimationController _boardController;
 
-  double _boardOpacity = 10.0;
+  double _boardOpacity = 1.0;
   bool _showWinnerDisplay = false;
   int _moveCount = 0;
   int _xWins = 0;
@@ -68,6 +68,7 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -77,18 +78,16 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
                 scoreBoard,
                 Padding(
                   padding: EdgeInsets.only(
-                    left: 100,
-                    right: 100,
+                    left: 0,
+                    right: 0,
                     top: 50,
                     bottom: 40,
                   ),
-                  child: Container(
-                    child: Stack(
-                      children: <Widget>[
-                        board,
-                        winnerDisplay,
-                      ],
-                    ),
+                  child: Stack(
+                    children: <Widget>[
+                      board,
+                      winnerDisplay,
+                    ],
                   ),
                 ),
                 bottomBar,
@@ -230,9 +229,9 @@ class _TwoPlayerGameState extends State<TwoPlayerGame>
           children: <Widget>[
             FloatingActionButton(
               heroTag: 'reset',
-              child: Icon(Icons.cached),
+              child: Icon(Icons.refresh),
               backgroundColor: accentColor,
-              mini: true,
+              mini: false,
               onPressed: () => reset(),
             ),
           ],

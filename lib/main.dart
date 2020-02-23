@@ -165,7 +165,7 @@ class _MyHomeAppState extends State<HomeApp> {
                 Navigator.pushNamed(context, "parallaxPageView");
               },
               child: Text(
-                "p",
+                "PageView",
                 style: TextStyle(color: Colors.white),
               ),
               color: Colors.blue,

@@ -7,17 +7,18 @@ class TripPageItem extends StatelessWidget {
   final TripPageVisibility tripPageVisibility;
 
   TripPageItem({@required this.trip, @required this.tripPageVisibility});
-  
+  // TripPageItem({@required this.trip});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(36.0),
           child: Stack(
             fit: StackFit.expand,
             children: [
-              // _buildImageContainer(),
+              _buildImageContainer(),
               _buildTextContainer(),
               _buildImageOverlayContainer()
             ],
@@ -26,12 +27,11 @@ class TripPageItem extends StatelessWidget {
   }
 
   Widget _buildImageContainer() {
-    return Image.asset(this.trip.imageUrl,
-        fit: BoxFit.cover,
-        alignment: Alignment(
-          this.tripPageVisibility.pagePosition,
-          0,
-        ));
+    return Image.asset(
+      trip.imageUrl,
+      fit: BoxFit.cover,
+      alignment: Alignment(this.tripPageVisibility.pagePosition, 0),
+    );
   }
 
   Widget _buildImageOverlayContainer() {
@@ -84,6 +84,4 @@ class TripPageItem extends StatelessWidget {
       ),
     );
   }
-
-  
 }

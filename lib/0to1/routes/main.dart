@@ -18,6 +18,12 @@ class RoutesApp extends StatelessWidget {
         '/': (context) => HomePage1(),
         '/page2': (context) => Page2()
       },
+      onGenerateRoute: (settings) {
+        //todo 沒有用RRRR?
+        return MaterialPageRoute(builder: (context) {
+          return HomePage1();
+        },);
+      },
     );
   }
 }

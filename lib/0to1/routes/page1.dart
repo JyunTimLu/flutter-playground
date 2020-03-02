@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/0to1/routes/page2.dart';
 
-class HomePage1 extends StatelessWidget {
-  
+class HomePage1 extends StatefulWidget {
   HomePage1({Key key}) : super(key: key);
 
+  @override
+  _HomePage1State createState() => _HomePage1State();
+}
+
+class _HomePage1State extends State<HomePage1> {
   String result;
 
   @override
@@ -36,8 +40,10 @@ class HomePage1 extends StatelessWidget {
                     },
                   ));
                   if (result != null) {
-                    this.result = result;
-                    print('$result');
+                    setState(() {
+                      this.result = result;
+                      print('$result');
+                    });
                   }
                 }),
           ),
@@ -55,11 +61,10 @@ class HomePage1 extends StatelessWidget {
   }
 
   Widget _buildResultText(result) {
-      if (result == null) {
-        return Text('Empty result');
-      } else {
-        return Text(result);
-      }
+    if (result == null) {
+      return Text('Empty result');
+    } else {
+      return Text(result);
     }
-
+  }
 }

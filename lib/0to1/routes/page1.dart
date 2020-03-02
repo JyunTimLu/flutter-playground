@@ -31,7 +31,7 @@ class _HomePage1State extends State<HomePage1> {
           ),
           Container(
             child: RaisedButton(
-                child: Text('go page 2 by route'),
+                child: Text('go page 2 for result'),
                 onPressed: () async {
                   final result =
                       await Navigator.push(context, MaterialPageRoute(
@@ -49,12 +49,26 @@ class _HomePage1State extends State<HomePage1> {
           ),
           Container(
             child: RaisedButton(
-                child: Text('go page 2 for result'),
-                onPressed: () {
+                child: Text('go page 2 by route'),
+                onPressed: () async {
+                  final result = await Navigator.pushNamed(context, 'page2');
+                  if (result != null) {
+                    setState(() {
+                      this.result = result;
+                      print('$result');
+                    });
+                  }
                   print('');
                 }),
           ),
           _buildResultText(result),
+          RaisedButton(
+            child: Text('go page2 with params'),
+            onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return Page2(param: 'string param',);
+            }));
+          })
         ],
       ),
     );

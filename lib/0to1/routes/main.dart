@@ -13,13 +13,9 @@ class RoutesApp extends StatelessWidget {
         primaryColor: Colors.amberAccent,
         primaryColorDark: Colors.amber,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Route App'),
-        ),
-        body: HomePage1(),
-      ),
+      initialRoute: '/',
       routes: {
+        '/': (context) => HomePage1(),
         'page2': (context) => Page2()
       },
     );

@@ -7,6 +7,9 @@ class Page2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final arg = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(title: Text('Route App')),
       body: Center(
@@ -42,14 +45,14 @@ class Page2 extends StatelessWidget {
                 ),
               ],
             ),
-            _genParamsText(),
+            _genParamsText(param ?? arg),
           ],
         ),
       ),
     );
   }
 
-  Widget _genParamsText() {
+  Widget _genParamsText(param) {
     if (param == null) {
       return Container();
     } else {

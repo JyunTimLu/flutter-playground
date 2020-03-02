@@ -53,14 +53,21 @@ class _HomePage1State extends State<HomePage1> {
               child: RaisedButton(
                   child: Text('go page 2 by route'),
                   onPressed: () async {
-                    final result = await Navigator.pushNamed(context, '/page2');
-                    if (result != null) {
-                      setState(() {
-                        this.result = result;
-                        print('$result');
-                      });
-                    }
-                    print('');
+                    // Future callback
+                    Navigator.pushNamed(context, '/page2').then((value) => {
+                          this.setState(() {
+                            this.result = value;
+                          })
+                        });
+
+                    //await
+                    // final result = await Navigator.pushNamed(context, '/page2');
+                    // if (result != null) {
+                    //   setState(() {
+                    //     this.result = result;
+                    //     print('$result');
+                    //   });
+                    // }
                   }),
             ),
             _buildResultText(result),
@@ -78,10 +85,10 @@ class _HomePage1State extends State<HomePage1> {
             ),
             Text('Named Route Impl'),
             RaisedButton(
-              child: Text('go page2 with params'),
-              onPressed: () {
-                Navigator.pushNamed(context, '/page2', arguments: 'i am arg');
-            })
+                child: Text('go page2 with params'),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/page2', arguments: 'i am arg');
+                })
           ],
         ),
       ),

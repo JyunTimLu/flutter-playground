@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/0to1/routes/page3.dart';
 
 class Page2 extends StatelessWidget {
   final String param;
@@ -7,7 +8,6 @@ class Page2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final arg = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
@@ -15,6 +15,13 @@ class Page2 extends StatelessWidget {
       body: Center(
         child: Column(
           children: <Widget>[
+            Center(
+                child: Container(
+              color: Colors.amber,
+              width: 200.0,
+              height: 200.0,
+              child: Center(child: Page3Navigator()),
+            )),
             Container(
               child: Text('this is page2'),
             ),
